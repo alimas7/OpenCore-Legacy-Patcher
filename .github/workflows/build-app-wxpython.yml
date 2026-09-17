@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     name: Build wxPython
-    runs-on: x86_64_monterey
+    runs-on: macos-13
     # if: github.repository_owner == 'dortania'
 
     env:
@@ -68,8 +68,6 @@ jobs:
       - name: Prepare Application (--prepare-application)
         run: >
           /Library/Frameworks/Python.framework/Versions/3.11/bin/python3 Build-Project.command
-          # --application-signing-identity "${{ env.ORG_MAC_DEVELOPER_ID_APPLICATION_IDENTITY }}"
-          # --notarization-apple-id "${{ env.ORG_MAC_NOTARIZATION_APPLE_ID }}" --notarization-password "${{ env.ORG_MAC_NOTARIZATION_PASSWORD }}" --notarization-team-id "${{ env.ORG_MAC_NOTARIZATION_TEAM_ID }}"
           --git-branch "${{ env.branch }}" --git-commit-url "${{ env.commiturl }}" --git-commit-date "${{ env.commitdate }}"
           --analytics-key "${{ env.ANALYTICS_KEY }}" --analytics-endpoint "${{ env.ANALYTICS_SITE }}"
           --reset-pyinstaller-cache
@@ -79,8 +77,6 @@ jobs:
       - name: Prepare Package (--prepare-package)
         run: >
           /Library/Frameworks/Python.framework/Versions/3.11/bin/python3 Build-Project.command
-          # --installer-signing-identity "${{ env.ORG_MAC_DEVELOPER_ID_INSTALLER_IDENTITY }}"
-          # --notarization-apple-id "${{ env.ORG_MAC_NOTARIZATION_APPLE_ID }}" --notarization-password "${{ env.ORG_MAC_NOTARIZATION_PASSWORD }}" --notarization-team-id "${{ env.ORG_MAC_NOTARIZATION_TEAM_ID }}"
           --run-as-individual-steps
           --prepare-package
 
