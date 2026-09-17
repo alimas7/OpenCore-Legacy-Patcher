@@ -49,7 +49,15 @@ jobs:
       #   with:
       #     p12-file-base64: ${{ secrets.ORG_MAC_DEVELOPER_ID_INSTALLER_CERT_P12_BASE64 }}
       #     p12-password: ${{ secrets.ORG_MAC_DEVELOPER_ID_INSTALLER_CERT_P12_PASSWORD }}
-
+      
+      - name: Display runner architecture
+        run: |
+          echo "Runner OS: $RUNNER_OS"
+          echo "Runner architecture: $RUNNER_ARCH"
+          echo "Kernel architecture: $(uname -m)"
+          echo "Process architecture: $(arch)"
+          sysctl -n hw.optional.arm64 2>/dev/null || true
+    
       - name: Install Dependencies
         run: /Library/Frameworks/Python.framework/Versions/3.11/bin/python3 -m pip install -r requirements.txt
 
